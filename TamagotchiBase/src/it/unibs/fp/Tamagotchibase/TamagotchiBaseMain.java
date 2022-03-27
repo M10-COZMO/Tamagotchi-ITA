@@ -25,6 +25,7 @@ public class TamagotchiBaseMain {
 		String tamagotchiName;
 		String [] voci = {"Dai carezze", "Dai Biscotto"};
 		
+		
 		//CREAZIONE DEL PROPRIO TAMAGOTCHI
 		System.out.println(SALUTO);
 		System.out.println(RICHIEDI_NOME);
@@ -43,25 +44,27 @@ public class TamagotchiBaseMain {
 		System.out.println(pet.getInfo());
 		
 		MyMenu menu = new MyMenu (TITOLO_MENU, voci);
-		do {
+		do 
+		{
 			scelta = menu.scegli();
 			
-			switch (scelta) {
+			switch (scelta) 
+			{
 			case 1: //CAREZZE
 				daiCarezze = InputDati.leggiIntero(RICHIEDI_CAREZZE, 0, 20);
 				pet.daiCarezze(daiCarezze);
+				System.out.println(pet.getInfo());
 				break;
-			case 2:
+				
+			case 2: //BISCOTTI
 				daiBiscotti = InputDati.leggiIntero(RICHIEDI_BISCOTTI, 0, 20);
 				pet.daiBiscotti(daiBiscotti);
+				System.out.println(pet.getInfo());
 				break;
+				
 			default:
 				break;
 			}
 		} while (scelta !=0);
-		
-		
-
 	}
-
 }

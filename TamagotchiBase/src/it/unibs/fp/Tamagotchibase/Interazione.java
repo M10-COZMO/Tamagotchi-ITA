@@ -17,6 +17,4 @@ public class Interazione {
 		this.valore = _valore;
 	}
 	
-	
-
 }
