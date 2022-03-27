@@ -1,1 +1,3 @@
 # Tamagotchi
+
+This is just an university assignment, unfortunatly i had to do it in italian...
