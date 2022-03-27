@@ -6,6 +6,7 @@ import it.unibs.fp.mylib.MyMenu;
 	
 public class TamagotchiBaseMain {
 	
+	private static final String GAME_OVER = "GAME OVER";
 	private static final String RICHIEDI_SODDISFAZIONE = "Inserisci valore soddisfazione: ";
 	private static final String RICHIEDI_SAZIETA = "Inserisci valore sazietà: ";
 	private static final String RICHIEDI_BISCOTTI = "Inserire valore biscotti: ";
@@ -41,8 +42,9 @@ public class TamagotchiBaseMain {
 		
 		//PRESENTAZIONE TAMAGOTCHI
 		System.out.println(PRESENTAZIONE_TAMAGOTCHI);
-		System.out.println(pet.getInfo());
+		System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
 		
+		//MENU E SCELTA CAREZZE O BISCOTTI
 		MyMenu menu = new MyMenu (TITOLO_MENU, voci);
 		do 
 		{
@@ -52,19 +54,26 @@ public class TamagotchiBaseMain {
 			{
 			case 1: //CAREZZE
 				daiCarezze = InputDati.leggiIntero(RICHIEDI_CAREZZE, 0, 20);
-				pet.daiCarezze(daiCarezze);
-				System.out.println(pet.getInfo());
+				//pet.daiCarezze(daiCarezze);
+				soddisfazione.incrementoValore(daiCarezze);
+				sazietà.decrementoValore(10);
+				System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
 				break;
 				
 			case 2: //BISCOTTI
 				daiBiscotti = InputDati.leggiIntero(RICHIEDI_BISCOTTI, 0, 20);
-				pet.daiBiscotti(daiBiscotti);
-				System.out.println(pet.getInfo());
+				//pet.daiBiscotti(daiBiscotti);
+				sazietà.incrementoValore(daiBiscotti);
+				soddisfazione.decrementoValore(10);
+				System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
 				break;
-				
 			default:
 				break;
 			}
-		} while (scelta !=0);
+		} while (scelta != 0 || soddisfazione.getValore() == 0 || soddisfazione.getValore() == 0);
+		
+		if (scelta == 0 || soddisfazione.getValore() == 0 || soddisfazione.getValore() == 0) {
+			System.out.println(GAME_OVER);
+		}
 	}
 }

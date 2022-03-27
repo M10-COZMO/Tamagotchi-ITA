@@ -38,7 +38,7 @@ public class Tamagotchi
 	}
 	
 	
-	public String getInfo() {
+	public String getInfo(int soddisfazione, int sazietà, String nome) {
 		return ( "-Nome: " + nome + "\n" + "-Soddisfazione: " + soddisfazione + "\n" + "-Sazietà: " + sazietà);
 	}
 	

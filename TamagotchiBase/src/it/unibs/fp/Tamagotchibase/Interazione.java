@@ -5,7 +5,7 @@ public class Interazione {
 	private int valore;
 
 	public Interazione(int _valore) {
-		super();
+		//super();
 		this.valore = _valore;
 	}
 
@@ -17,4 +17,10 @@ public class Interazione {
 		this.valore = _valore;
 	}
 	
+	public void incrementoValore(int incremento) {
+		valore = valore + incremento;
+	}
+	public void decrementoValore(int decremento) {
+		valore = valore - decremento;
+	}
 }
