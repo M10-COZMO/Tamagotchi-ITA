@@ -20,10 +20,11 @@ public class TamagotchiBaseMain {
 	public static void main(String[] args) 
 	{
 		Scanner input = new Scanner(System.in);
-		int valoreSoddisfazione, valoreSazietà;
+		//int valoreSoddisfazione, valoreSazietà;
+		int soddisfazione, sazietà;
 		int daiCarezze, daiBiscotti;
 		int scelta = 0;
-		String tamagotchiName;
+		String tamagotchiName, umore;
 		String [] voci = {"Dai carezze", "Dai Biscotto"};
 		
 		
@@ -32,17 +33,24 @@ public class TamagotchiBaseMain {
 		System.out.println(RICHIEDI_NOME);
 		tamagotchiName = input.nextLine();
 		System.out.println(RICHIEDI_VALORI_INIZIALI);
-		valoreSoddisfazione = InputDati.leggiIntero(RICHIEDI_SODDISFAZIONE, 0, 100);
-		valoreSazietà = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
+		//valoreSoddisfazione = InputDati.leggiIntero(RICHIEDI_SODDISFAZIONE, 0, 100);
+		//valoreSazietà = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
+		soddisfazione = InputDati.leggiIntero(RICHIEDI_SODDISFAZIONE, 0, 100);
+		sazietà = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
 		
 		//ASSEGNAZIONE DELLE CLASSI
-		Interazione soddisfazione = new Interazione(valoreSoddisfazione);
-		Interazione sazietà = new Interazione(valoreSazietà);
-		Tamagotchi pet = new Tamagotchi(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName);
+		//Interazione soddisfazione = new Interazione(valoreSoddisfazione);
+		//Interazione sazietà = new Interazione(valoreSazietà);
+		if (soddisfazione <= 30 || sazietà <= 30) {
+			umore = ("Triste");
+		} else {
+			umore = ("Felice");
+		}
+		Tamagotchi pet = new Tamagotchi(soddisfazione, sazietà, tamagotchiName, umore);
 		
 		//PRESENTAZIONE TAMAGOTCHI
 		System.out.println(PRESENTAZIONE_TAMAGOTCHI);
-		System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
+		System.out.println(pet.getInfo());
 		
 		//MENU E SCELTA CAREZZE O BISCOTTI
 		MyMenu menu = new MyMenu (TITOLO_MENU, voci);
@@ -54,25 +62,25 @@ public class TamagotchiBaseMain {
 			{
 			case 1: //CAREZZE
 				daiCarezze = InputDati.leggiIntero(RICHIEDI_CAREZZE, 0, 20);
-				//pet.daiCarezze(daiCarezze);
-				soddisfazione.incrementoValore(daiCarezze);
-				sazietà.decrementoValore(10);
-				System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
+				pet.daiCarezze(daiCarezze);
+				//soddisfazione.incrementoValore(daiCarezze);
+				//sazietà.decrementoValore(10);
+				System.out.println(pet.getInfo());
 				break;
 				
 			case 2: //BISCOTTI
 				daiBiscotti = InputDati.leggiIntero(RICHIEDI_BISCOTTI, 0, 20);
-				//pet.daiBiscotti(daiBiscotti);
-				sazietà.incrementoValore(daiBiscotti);
-				soddisfazione.decrementoValore(10);
-				System.out.println(pet.getInfo(soddisfazione.getValore(), sazietà.getValore(), tamagotchiName));
+				pet.daiBiscotti(daiBiscotti);
+				//sazietà.incrementoValore(daiBiscotti);
+				//soddisfazione.decrementoValore(10);
+				System.out.println(pet.getInfo());
 				break;
 			default:
 				break;
 			}
-		} while (scelta != 0 || soddisfazione.getValore() == 0 || soddisfazione.getValore() == 0);
+		} while (scelta != 0);
 		
-		if (scelta == 0 || soddisfazione.getValore() == 0 || soddisfazione.getValore() == 0) {
+		if (scelta == 0) {
 			System.out.println(GAME_OVER);
 		}
 	}
