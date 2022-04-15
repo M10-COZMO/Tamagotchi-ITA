@@ -20,11 +20,10 @@ public class TamagotchiMain {
 	public static void main(String[] args) 
 	{
 		Scanner input = new Scanner(System.in);
-		//int valoreSoddisfazione, valoreSazietà;
-		int soddisfazione, sazietà;
+		int soddisfazione, sazieta;
 		int daiCarezze, daiBiscotti;
 		int scelta = 0;
-		String tamagotchiName, umore;
+		String tamagotchiName;
 		String [] voci = {"Dai carezze", "Dai Biscotto"};
 		
 		
@@ -33,20 +32,11 @@ public class TamagotchiMain {
 		System.out.println(RICHIEDI_NOME);
 		tamagotchiName = input.nextLine();
 		System.out.println(RICHIEDI_VALORI_INIZIALI);
-		//valoreSoddisfazione = InputDati.leggiIntero(RICHIEDI_SODDISFAZIONE, 0, 100);
-		//valoreSazietà = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
 		soddisfazione = InputDati.leggiIntero(RICHIEDI_SODDISFAZIONE, 0, 100);
-		sazietà = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
+		sazieta = InputDati.leggiIntero(RICHIEDI_SAZIETA, 0, 100);
 		
-		//ASSEGNAZIONE DELLE CLASSI
-		//Interazione soddisfazione = new Interazione(valoreSoddisfazione);
-		//Interazione sazietà = new Interazione(valoreSazietà);
-		if (soddisfazione <= 30 || sazietà <= 30) {
-			umore = ("Triste");
-		} else {
-			umore = ("Felice");
-		}
-		Tamagotchi pet = new Tamagotchi(soddisfazione, sazietà, tamagotchiName, umore);
+		//ASSEGNAZIONE DELLA CLASSE TAMAGOTCHI
+		Tamagotchi pet = new Tamagotchi(tamagotchiName, soddisfazione, sazieta);
 		
 		//PRESENTAZIONE TAMAGOTCHI
 		System.out.println(PRESENTAZIONE_TAMAGOTCHI);
@@ -62,18 +52,20 @@ public class TamagotchiMain {
 			{
 			case 1: //CAREZZE
 				daiCarezze = InputDati.leggiIntero(RICHIEDI_CAREZZE, 0, 20);
-				pet.daiCarezze(daiCarezze);
-				//soddisfazione.incrementoValore(daiCarezze);
-				//sazietà.decrementoValore(10);
+				pet.riceviCarezze(daiCarezze);
 				System.out.println(pet.getInfo());
+				if (pet.sonoMorto()) {
+					scelta = 0;
+				}
 				break;
 				
 			case 2: //BISCOTTI
 				daiBiscotti = InputDati.leggiIntero(RICHIEDI_BISCOTTI, 0, 20);
-				pet.daiBiscotti(daiBiscotti);
-				//sazietà.incrementoValore(daiBiscotti);
-				//soddisfazione.decrementoValore(10);
+				pet.riceviBiscotti(daiBiscotti);
 				System.out.println(pet.getInfo());
+				if (pet.sonoMorto()) {
+					scelta = 0;
+				}
 				break;
 			default:
 				break;

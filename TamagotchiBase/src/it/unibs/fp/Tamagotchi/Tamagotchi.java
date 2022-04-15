@@ -2,16 +2,21 @@ package it.unibs.fp.Tamagotchi;
 
 public class Tamagotchi 
 {
-	private int soddisfazione, sazietà;
+	private static final String TAMA_VIVO = "Il tamagotchi sta bene";
+	private static final String TAMA_MORTO = "Tamagotchi morto";
+	private static final String UMORE_TRISTE = "Sono triste";
+	private static final String UMORE_FELICE = "Sono felice";
+	
+	private int soddisfazione, sazieta;
 	private String nome, umore;
+	private Boolean morte, triste;
 	
 	
-	public Tamagotchi(int _soddisfazione, int _sazietà, String _nome, String _umore) {
+	public Tamagotchi(String _nome, int _soddisfazione, int _sazieta) {
 		//super();
 		this.soddisfazione = _soddisfazione;
-		this.sazietà = _sazietà;
+		this.sazieta = _sazieta;
 		this.nome = _nome;
-		this.umore = _umore;
 	}
 
 	public String getUmore() {
@@ -31,11 +36,11 @@ public class Tamagotchi
 	}
 
 	public int getSazietà() {
-		return sazietà;
+		return sazieta;
 	}
 
 	public void setSazietà(int sazietà) {
-		this.sazietà = sazietà;
+		this.sazieta = sazietà;
 	}
 
 	public String getNome() {
@@ -48,28 +53,49 @@ public class Tamagotchi
 	
 	
 	public String getInfo() {
-		return ( "-Nome: " + nome + "\n" + "-Soddisfazione: " + soddisfazione + "\n" + "-Sazietà: " + sazietà + "\n" + "-Stato: " + umore);
+		if (soddisfazione <= 30 || sazieta <= 30) {
+			umore = UMORE_TRISTE;
+		} else {
+			umore = UMORE_FELICE;
+		}
+		return ( "-Nome: " + nome + "\n" + "-Soddisfazione: " + soddisfazione + "\n" + "-Sazietà: " + sazieta + "\n" + "-Stato: " + umore);
+	}
+	
+	// METODO PER STABILIRE LA MORTE
+	public Boolean sonoMorto() {
+		if(soddisfazione == 0 || sazieta == 0 || sazieta >= 100) {
+			morte = true;
+			System.out.println(TAMA_MORTO);
+	    } else {
+			morte = false;
+			System.out.println(TAMA_VIVO);
+	      }
+		return morte;
+	}
+	
+	// METODO PER STABILIRE LA TRISTEZZA O MENO DEL TAMAGOTCHI
+	public Boolean sonoTriste() {
+		if (soddisfazione <= 30 || sazieta <= 30 || soddisfazione >= 95 || sazieta >= 95) {
+			triste = true;
+			umore = UMORE_TRISTE;
+			System.out.println(umore);
+		} else {
+			triste = false;
+			umore = UMORE_FELICE;
+		 }
+		return triste;
 	}
 	
 	
-	public void daiCarezze (int numCarezze) {
+	public void riceviCarezze (int numCarezze) {
 		soddisfazione = soddisfazione + numCarezze;
 		soddisfazione = Math.min(100, soddisfazione);
-		sazietà = Math.max(0, sazietà - 10);
-		if (soddisfazione <= 30 || sazietà <= 30) {
-			umore = ("Triste");
-		} else {
-			umore = ("Felice");
-		}
+		sazieta = Math.max(0, sazieta - 10);
 	}
-    public void daiBiscotti (int numBiscotti) {
-		sazietà = sazietà + numBiscotti;
-		sazietà = Math.min(100, sazietà);
+	
+    public void riceviBiscotti (int numBiscotti) {
+		sazieta = sazieta + numBiscotti;
+		sazieta = Math.min(100, sazieta);
 		soddisfazione = Math.max(0, soddisfazione - 10);
-		if (soddisfazione <= 30 || sazietà <= 30) {
-			umore = ("Triste");
-		} else {
-			umore = ("Felice");
-		}
 	}
 }
