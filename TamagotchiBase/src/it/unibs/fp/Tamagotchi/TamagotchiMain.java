@@ -1,10 +1,10 @@
-package it.unibs.fp.Tamagotchibase;
+package it.unibs.fp.Tamagotchi;
 
 import java.util.Scanner;
 import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 	
-public class TamagotchiBaseMain {
+public class TamagotchiMain {
 	
 	private static final String GAME_OVER = "GAME OVER";
 	private static final String RICHIEDI_SODDISFAZIONE = "Inserisci valore soddisfazione: ";

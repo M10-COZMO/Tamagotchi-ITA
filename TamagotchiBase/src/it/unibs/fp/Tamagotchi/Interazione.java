@@ -1,4 +1,4 @@
-package it.unibs.fp.Tamagotchibase;
+package it.unibs.fp.Tamagotchi;
 
 public class Interazione {
 	
